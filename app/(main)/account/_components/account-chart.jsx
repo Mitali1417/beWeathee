@@ -7,7 +7,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
   Legend,
   ResponsiveContainer,
 } from "recharts";
@@ -20,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 const DATE_RANGES = {
   "7D": { label: "Last 7 Days", days: 7 },
@@ -27,6 +27,17 @@ const DATE_RANGES = {
   "3M": { label: "Last 3 Months", days: 90 },
   "6M": { label: "Last 6 Months", days: 180 },
   ALL: { label: "All Time", days: null },
+};
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "var(--chart-1)",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "var(--chart-2)",
+  },
 };
 
 export function AccountChart({ transactions }) {
@@ -41,7 +52,7 @@ export function AccountChart({ transactions }) {
 
     // Filter transactions within date range
     const filtered = transactions.filter(
-      (t) => new Date(t.date) >= startDate && new Date(t.date) <= endOfDay(now)
+      (t) => new Date(t.date) >= startDate && new Date(t.date) <= endOfDay(now),
     );
 
     // Group transactions by date
@@ -60,7 +71,7 @@ export function AccountChart({ transactions }) {
 
     // Convert to array and sort by date
     return Object.values(grouped).sort(
-      (a, b) => new Date(a.date) - new Date(b.date)
+      (a, b) => new Date(a.date) - new Date(b.date),
     );
   }, [transactions, dateRange]);
 
@@ -71,7 +82,7 @@ export function AccountChart({ transactions }) {
         income: acc.income + day.income,
         expense: acc.expense + day.expense,
       }),
-      { income: 0, expense: 0 }
+      { income: 0, expense: 0 },
     );
   }, [filteredData]);
 
@@ -123,9 +134,13 @@ export function AccountChart({ transactions }) {
         </div>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
+          <ChartContainer config={chartConfig}>
+
             <BarChart
               data={filteredData}
+              accessibilityLayer
               margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
+              
             >
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
               <XAxis
@@ -140,28 +155,34 @@ export function AccountChart({ transactions }) {
                 axisLine={false}
                 tickFormatter={(value) => `$${value}`}
               />
-              <Tooltip
+              {/* <Tooltip
                 formatter={(value) => [`$${value}`, undefined]}
                 contentStyle={{
-                  backgroundColor: "hsl(var(--popover))",
-                  border: "1px solid hsl(var(--border))",
+                  backgroundColor: "var(--popover)",
+                  border: "1px solid var(--border)",
                   borderRadius: "var(--radius)",
                 }}
-              />
+              /> */}
+               <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dashed" />}
+            />
               <Legend />
               <Bar
                 dataKey="income"
                 name="Income"
-                fill="#22c55e"
+                fill="var(--chart-2)"
                 radius={[4, 4, 0, 0]}
               />
               <Bar
                 dataKey="expense"
                 name="Expense"
-                fill="#ef4444"
+                fill="var(--chart-1)"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>
+          </ChartContainer>
+
           </ResponsiveContainer>
         </div>
       </CardContent>

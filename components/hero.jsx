@@ -46,11 +46,11 @@ const HeroSection = () => {
         <div className="hero-image-wrapper mt-5 md:mt-0">
           <div ref={imageRef} className="hero-image saturate-[20%]">
             <Image
-              src="/banner.svg"
+              src="/banner.jpg"
               width={980}
-              height={720}
+              height={320}
               alt="Dashboard Preview"
-              className="rounded-lg shadow-2xl border mx-auto"
+              className="rounded-lg shadow-2xl object-cover mx-auto"
               priority
             />
           </div>

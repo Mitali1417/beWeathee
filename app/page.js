@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { featuresData, howItWorksData } from "@/data/landing";
 import HeroSection from "@/components/hero";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const LandingPage = () => {
   return (
@@ -37,8 +38,14 @@ const LandingPage = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuresData.map((feature, index) => (
-              <Card className="p-6 bg-transparent border-none" key={index}>
-                <CardContent className="space-y-3 pt-4">
+              <Card
+                className={cn(
+                  "p-6 bg-transparent border-0 bg-linear-to-t transition-all ease-in-out duration-700",
+                  index % 2 !== 0 ? "border" : "from-secondary to-transparent",
+                )}
+                key={index}
+              >
+                <CardContent className="space-y-3 pt-4 select-none  pointer-events-none">
                   {feature.icon}
                   <h3 className="text-lg font-semibold">{feature.title}</h3>
                   <p className="text-gray-600 text-sm">{feature.description}</p>

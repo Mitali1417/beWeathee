@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         <body className={`${inter.className}`} suppressHydrationWarning>
           <Header />
           <main className="min-h-screen">{children}</main>
-          <Toaster richColors />
+          <Toaster theme="dark" />
 
           <footer className="pb-6 pt-8 border-t border mt-6">
             <div className="container mx-auto px-4 text-sm text-center text-gray-600 space-y-1">

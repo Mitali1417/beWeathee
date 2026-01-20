@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { ExpensePieChart } from "./expense-pie-chart";
 
 const COLORS = [
   "#FF6B6B",
@@ -68,6 +69,8 @@ export function DashboardOverview({ accounts, transactions }) {
     return acc;
   }, {});
 
+
+
   // Format data for pie chart
   const pieChartData = Object.entries(expensesByCategory).map(
     ([category, amount]) => ({
@@ -75,6 +78,9 @@ export function DashboardOverview({ accounts, transactions }) {
       value: amount,
     })
   );
+
+  console.log({pieChartData})
+
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
@@ -158,7 +164,8 @@ export function DashboardOverview({ accounts, transactions }) {
             </p>
           ) : (
             <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
+              <ExpensePieChart pieChartData={pieChartData} />
+              {/* <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={pieChartData}
@@ -186,7 +193,7 @@ export function DashboardOverview({ accounts, transactions }) {
                   />
                   <Legend />
                 </PieChart>
-              </ResponsiveContainer>
+              </ResponsiveContainer> */}
             </div>
           )}
         </CardContent>

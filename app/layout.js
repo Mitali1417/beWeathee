@@ -15,9 +15,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider appearance={{
+    <ClerkProvider
+      appearance={{
         baseTheme: dark,
-      }}>
+      }}
+    >
       <html lang="en" suppressHydrationWarning className="dark">
         <head>
           {/* <link rel="icon" href="/logo-sm.png" sizes="any" /> */}
@@ -45,12 +47,15 @@ export default function RootLayout({ children }) {
           <main className="min-h-screen">{children}</main>
           <Toaster richColors />
 
-          <footer className="py-4 border-t border">
-            <div className="container mx-auto px-4 text-center text-gray-600">
+          <footer className="pb-6 pt-8 border-t border mt-6">
+            <div className="container mx-auto px-4 text-sm text-center text-gray-600 space-y-1">
+              <p className="text-sm">
+                beWealthee © {new Date().getFullYear()}. All rights reserved.
+              </p>
               <p>
                 Made by{" "}
-                <span className="text-blue-700 hover:underline">
-                  <Link href="http://mitali.vercel.app/">Mitali </Link>
+                <span className=" hover:underline">
+                  <Link href="http://mitali.vercel.app/">Mitali</Link>
                 </span>{" "}
               </p>
             </div>

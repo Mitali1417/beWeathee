@@ -32,7 +32,7 @@ const HeroSection = () => {
         <h1 className="text-5xl md:text-8xl lg:text-[105px] pb-6 gradient-title">
           Finance Made Simple, <br /> Wealth Made Possible
         </h1>
-        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
           Smart AI that tracks your journey, simplifies your spending, and
           empowers you with instant insights to grow your wealth effortlessly.
         </p>
@@ -44,10 +44,10 @@ const HeroSection = () => {
           </Link>
         </div>
         <div className="hero-image-wrapper mt-5 md:mt-0">
-          <div ref={imageRef} className="hero-image">
+          <div ref={imageRef} className="hero-image saturate-[20%]">
             <Image
               src="/banner.svg"
-              width={1280}
+              width={980}
               height={720}
               alt="Dashboard Preview"
               className="rounded-lg shadow-2xl border mx-auto"

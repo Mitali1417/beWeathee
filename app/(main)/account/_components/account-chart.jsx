@@ -19,7 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
 const DATE_RANGES = {
   "7D": { label: "Last 7 Days", days: 7 },
@@ -30,13 +34,13 @@ const DATE_RANGES = {
 };
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
+  income: {
+    label: "Income",
     color: "var(--chart-2)",
+  },
+  expense: {
+    label: "Expense",
+    color: "var(--chart-1)",
   },
 };
 
@@ -134,28 +138,26 @@ export function AccountChart({ transactions }) {
         </div>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-          <ChartContainer config={chartConfig}>
-
-            <BarChart
-              data={filteredData}
-              accessibilityLayer
-              margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
-              
-            >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis
-                dataKey="date"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-              />
-              <YAxis
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => `$${value}`}
-              />
-              {/* <Tooltip
+            <ChartContainer config={chartConfig}>
+              <BarChart
+                data={filteredData}
+                accessibilityLayer
+                margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <XAxis
+                  dataKey="date"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={(value) => `$${value}`}
+                />
+                {/* <Tooltip
                 formatter={(value) => [`$${value}`, undefined]}
                 contentStyle={{
                   backgroundColor: "var(--popover)",
@@ -163,26 +165,25 @@ export function AccountChart({ transactions }) {
                   borderRadius: "var(--radius)",
                 }}
               /> */}
-               <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="dashed" />}
-            />
-              <Legend />
-              <Bar
-                dataKey="income"
-                name="Income"
-                fill="var(--chart-2)"
-                radius={[4, 4, 0, 0]}
-              />
-              <Bar
-                dataKey="expense"
-                name="Expense"
-                fill="var(--chart-1)"
-                radius={[4, 4, 0, 0]}
-              />
-            </BarChart>
-          </ChartContainer>
-
+                <ChartTooltip
+                  cursor={false}
+                  content={<ChartTooltipContent indicator="dashed" />}
+                />
+                <Legend />
+                <Bar
+                  dataKey="income"
+                  name="Income"
+                  fill="var(--color-income)"
+                  radius={[4, 4, 0, 0]}
+                />
+                <Bar
+                  dataKey="expense"
+                  name="Expense"
+                  fill="var(--color-expense)"
+                  radius={[4, 4, 0, 0]}
+                />
+              </BarChart>
+            </ChartContainer>
           </ResponsiveContainer>
         </div>
       </CardContent>
